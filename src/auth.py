@@ -1,9 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
-import MySQLdb.cursors
-from . import mysql
-
+from .models import User
+from . import db
 
 auth = Blueprint('auth', __name__)
 
@@ -20,21 +19,14 @@ def login_post():
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
     
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT password FROM users WHERE email = %s', (email, ))
-    actualPasswordHash = cursor.fetchone().get('password')
-
-    print(password)
-    print(actualPasswordHash)
-
-    if check_password_hash(actualPasswordHash, password):
-        print("SUCESS")
-        #login_user(user, remember=remember)
-        return redirect(url_for('main.profile'))
-    else:
-        print("FAIL")
-        flash('Incorrect Email/Password. Please check your login details and try again')
+    user = User.query.filter_by(email=email).first()
+    
+    if not user or not check_password_hash(user.password, password):
+        flash('Please check your login details and try again')
         return redirect(url_for('auth.login'))
+    
+    login_user(user, remember=remember)
+    return redirect(url_for('main.profile'))
 
 @auth.route('/signup')
 def signup():
@@ -48,23 +40,17 @@ def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = generate_password_hash(request.form.get('password'), method='pbkdf2:sha256')
-    birthday = request.form.get('birthday')
-    height = request.form.get('height')
-    weight = request.form.get('weight')
     
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM users WHERE email = %s', (email, ))
-    user = cursor.fetchone()
+    user = User.query.filter_by(email=email).first()
     
     if user:
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
-    elif not name or not email or not password or not birthday or not height or not weight:
-        flash('Please fill out all fields')
-        return redirect(url_for('auth.signup'))
-        
-    cursor.execute('INSERT INTO users VALUES (NULL, %s, %s, %s, %s, %s, %s)', (email, password, name, birthday, height, weight, ))
-    mysql.connection.commit()
+    
+    new_user = User(email=email, name=name, password=password, birthday="1 1 2000", height=72, weight=150)
+    
+    db.session.add(new_user)
+    db.session.commit()
     
     return redirect(url_for('auth.login'))
 
@@ -72,4 +58,4 @@ def signup_post():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('main.index'))
