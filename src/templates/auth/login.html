@@ -1,7 +1,8 @@
 {% extends "auth/authBase.html" %}
 
 {% block content %}
-<h1 class="text-light w-100 border-bottom border-2 pb-2 text-center">Login</h1>
+<h1 class="text-light w-100 text-center">Welcome Back</h1>
+<h6 class="text-light w-100 border-bottom border-2 pb-2 text-center">Please enter your email and password </h6>
 <div class="container-fluid">
   {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -10,25 +11,23 @@
     </div>
   {% endif %}
   {% endwith %}
-  <form method="POST" action="/login">
-    <div class="field">
-        <div class="control">
-            <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
-        </div>
+  <form method="POST" class="container-fluid p-2" action="/login">
+    <div class="container-fluid">
+        <input class="rounded-pill py-2 px-3 w-100 my-2" type="email" name="email" placeholder="Email" autofocus="">
     </div>
-
-    <div class="field">
-        <div class="control">
-            <input class="input is-large" type="password" name="password" placeholder="Your Password">
-        </div>
+    <div class="container-fluid">
+        <input class="rounded-pill py-2 px-3 w-100 my-2" type="password" name="password" placeholder="Your Password">
     </div>
-    <div class="field">
-        <label class="checkbox">
-            <input type="checkbox" name="remember">
-            Remember me
-        </label>
+    <div class="form-check mb-2 d-flex justify-content-center">
+        <input class="form-check-input bg-primary" type="checkbox" value="" name="remember" checked>
+        <label class="form-check-label text-light" for="remember">Remember me</label>
     </div>
-    <button class="bg-primary text-light border-pill">Login →</button>
+    <div>
+        <button class="btn bg-primary text-light rounded-pill w-100 border-light p-2">Login →</button>
+    </div>
+    <div class="container-fluid text-light text-center">
+        Don't have an account? <a href="/signup">Sign up</a>
+    </div>
 </form>
 
 </div>
