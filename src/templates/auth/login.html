@@ -1,0 +1,35 @@
+{% extends "auth/authBase.html" %}
+
+{% block content %}
+<h1 class="text-light w-100 border-bottom border-2 pb-2 text-center">Login</h1>
+<div class="container-fluid">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="border border-1 border-light rounded-pill bg-danger p-3 m-3 text-light text-center">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+  {% endwith %}
+  <form method="POST" action="/login">
+    <div class="field">
+        <div class="control">
+            <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <input class="input is-large" type="password" name="password" placeholder="Your Password">
+        </div>
+    </div>
+    <div class="field">
+        <label class="checkbox">
+            <input type="checkbox" name="remember">
+            Remember me
+        </label>
+    </div>
+    <button class="bg-primary text-light border-pill">Login →</button>
+</form>
+
+</div>
+{% endblock %}
