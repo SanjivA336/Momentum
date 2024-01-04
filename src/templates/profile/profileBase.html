@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gym Tracker - Profile</title>
+
+    <link rel="stylesheet" href="static\css\bootstrap.css">
+    <link rel="stylesheet" href="static\css\style.css">
+
+    <script defer src="static\js\bootstrap.bundle.min.js"></script>
+
+  </head>
+
+  <body class="bg-body">
+    <div class="container-fluid vh-100 m-0 p-5 d-flex align-items-center justify-content-center">
+      <div class="container bg-body-tertiary rounded rounded-6 shadow-lg p-3">
+        <div class="container-fluid d-flex justify-content-center">
+          <img src="static\images\pfp.png" alt="Logo" width="200" height="200" class="d-inline-block align-top">
+        </div>
+        <div class="container-fluid d-flex justify-content-center w-75 border-bottom border-2 border-body-secondary mb-3">
+          <h1 class="text-light text-center d-inline-block text-truncate">Welcome, {{ name }}!</h1>
+        </div>
+
+        {% block content %}
+
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
+
