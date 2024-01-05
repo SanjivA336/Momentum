@@ -24,26 +24,28 @@
         <input type="date" class="rounded-pill py-2 px-3 w-100 my-2 bg-body-secondary border-0 text-light" id="birthday" name="birthday" value="{{ birthday }}" required>
     </div>
 
-    <div class="container d-flex w-100 px-0 mx-0 flex-row mt-3"> 
-        <div class="col-6">
-            <div class="container d-flex px-4 w-100 mb-2">
-                <h5 class="text-light">Height: </h5>
+    <div class="container d-flex px-0 w-100">
+        <div class="d-flex w-100 px-0 mx-0 flex-row mt-3"> 
+            <div class="col-6">
+                <div class="container d-flex px-4 w-100 mb-2">
+                    <h5 class="text-light">Height: </h5>
+                </div>
+                <div class="container d-flex px-4 w-100"> 
+                    <input type="number" class="w-100 rounded-start-pill border-0 bg-body-secondary py-2 ps-3" name="height_feet" value="{{ hFeet }}" aria-label="Feet" required>
+                    <span class="bg-body-secondary text-light pe-2 py-2">'</span>
+                    <input type="number" class="w-100 border-0 bg-body-secondary py-2" name="height_inches" value="{{ hInches }}" aria-label="Inches" required>
+                    <span class="bg-body-secondary text-light rounded-end-pill pe-3 py-2">"</span>
+                </div>
             </div>
-            <div class="container d-flex px-4 w-100"> 
-                <input type="number" class="w-100 rounded-start-pill border-0 bg-body-secondary py-2 ps-3" name="height_feet" value="{{ hFeet }}" aria-label="Feet" required>
-                <span class="bg-body-secondary text-light pe-2 py-2">'</span>
-                <input type="number" class="w-100 border-0 bg-body-secondary py-2" name="height_inches" value="{{ hInches }}" aria-label="Inches" required>
-                <span class="bg-body-secondary text-light rounded-end-pill pe-3 py-2">"</span>
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="container d-flex px-4 w-100 mb-2">
-                <h5 class="text-light">Weight: </h5>
-            </div>
-            <div class="container d-flex px-4 w-100"> 
-                <input type="number" class="rounded-start-pill border-0 bg-body-secondary py-2 ps-3 w-100" name="weight" value="{{ weight }}" aria-label="Weight (In Pounds)" required>
-                <span class="bg-body-secondary text-light rounded-end-pill pe-3 py-2">lbs</span>
+    
+            <div class="col-6">
+                <div class="container d-flex px-4 w-100 mb-2">
+                    <h5 class="text-light">Weight: </h5>
+                </div>
+                <div class="container d-flex px-4 w-100"> 
+                    <input type="number" class="rounded-start-pill border-0 bg-body-secondary py-2 ps-3 w-100" name="weight" value="{{ weight }}" aria-label="Weight (In Pounds)" required>
+                    <span class="bg-body-secondary text-light rounded-end-pill pe-3 py-2">lbs</span>
+                </div>
             </div>
         </div>
     </div>
