@@ -5,10 +5,32 @@ from . import db
 
 main = Blueprint('main', __name__)
 
+
 @main.route('/')
+@main.route('/home')
 @login_required
-def index():
-    return render_template('main/index.html')
+def home():
+    return render_template('main/home.html', path=request.path)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @main.route('/info')
 @login_required
@@ -44,3 +66,13 @@ def info_post():
     flash('Your changes have been saved!')
     
     return redirect(url_for('main.info'))
+
+@main.route('/preferences')
+@login_required
+def prefs():
+    return render_template('profile/prefs.html', name=current_user.name)
+
+@main.route('/settings')
+@login_required
+def settings():
+    return render_template('profile/settings.html', name=current_user.name)

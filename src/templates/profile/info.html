@@ -3,9 +3,9 @@
 {% block content %}
 <div class="container-fluid d-flex justify-content-center">
     <div class="btn-group" role="group">
-      <button type="button" class="btn btn-primary">Your Information</button>
-      <button type="button" class="btn btn-outline-primary" href="{{ url_for('main.info') }}">Your Preferences</button>
-      <button type="button" class="btn btn-outline-primary" href="{{ url_for('main.info') }}">Your Settings</button>
+      <a class="btn btn-primary">Your Information</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('main.prefs') }}">Your Preferences</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('main.settings') }}">Your Settings</a>
     </div>
 </div>
 
@@ -64,7 +64,7 @@
     </div>
 
     <div class="container d-flex justify-content-center mt-3">
-        <button class="btn bg-primary text-light rounded-pill w-50 p-2 mx-2">Save Changes</button>
+        <button class="btn bg-primary text-light rounded-pill w-50 p-2 mx-2 border-0">Save Changes</button>
     </div>
 
     <div class="container-fluid text-light text-center d-flex justify-content-center mt-2 mb-0">
