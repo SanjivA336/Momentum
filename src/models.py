@@ -10,3 +10,5 @@ class User(UserMixin, db.Model):
     height = db.Column(db.Integer)
     weight = db.Column(db.Integer)
     gender = db.Column(db.String(1))
+    next_day_in_cycle = db.Column(db.String(100))
+    num_days_in_cycle = db.Column(db.Integer)
