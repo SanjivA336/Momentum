@@ -1,0 +1,17 @@
+--Command:
+OSX
+Windows
+
+--Activate Virtual Environment:
+. venv/bin/activate
+venv/Scripts/activate
+
+--Set Flask Environment Variables:
+export FLASK_APP=src/__init__.py
+export FLASK_ENV=development
+$env:FLASK_APP="src/__init__.py"
+$env:FLASK_ENV=development
+
+--Run Flask Environment:
+flask run --debug
+
