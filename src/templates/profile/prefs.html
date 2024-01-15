@@ -8,15 +8,19 @@
         <a class="btn btn-outline-primary" href="{{ url_for('main.settings') }}">Your Settings</a>
     </div>
 </div>
-
-<form method="POST" class="container-fluid p-2" action="/preferences">
-
-    <div class="container d-flex justify-content-center mt-3">
-        <button class="btn bg-primary text-light rounded-pill w-50 p-2 mx-2 border-0">Save Changes</button>
+<div class="d-flex row m-3 p-2"> 
+    {% for day in cycle %}
+    <div class="col-3 px-2">
+        <div class="container-fluid border border-1 border-light rounded-3 rounded shadow-lg p-3 my-3">
+            <h4 class="text-light w-100 border-bottom">{{ day[0] }}</h4>
+            <ol>
+                {% for workout in day[1] %}
+                <li>{{ workout }}</li>
+                {% endfor %}
+            </ol>
+        </div>
     </div>
-
-    <div class="container-fluid text-light text-center d-flex justify-content-center mt-2 mb-0">
-      <a href="/preferences" class="text-primary" style="text-decoration: none;">Reset</a>
-    </div>
-</form>
+    {% endfor %}
+</div>
+ 
 {% endblock %}

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
-from .models import User
+from .models import User, UserData, Exercises, History, Days
 from . import db
 
 main = Blueprint('main', __name__)
@@ -15,31 +15,36 @@ def home():
 @main.route('/info')
 @login_required
 def info():
+    name = current_user.name
+    birthday = getAttribute("birthday")
+    height = getAttribute("height")
+    weight = getAttribute("weight")
+    gender = getAttribute("gender")
+
     feet = ""
     inches = ""
-    if(current_user.height != None):
-        feet = current_user.height // 12
-        inches = current_user.height % 12
-    return render_template('profile/info.html', name=current_user.name, birthday=current_user.birthday, hFeet=feet, hInches=inches, weight=current_user.weight, gender=current_user.gender)
+    if(height != None):
+        feet = int(height) // 12
+        inches = int(height) % 12
+
+    return render_template('profile/info.html', name=name, birthday=birthday, hFeet=feet, hInches=inches, weight=weight, gender=gender)
 
 @main.route('/info', methods=['POST'])
 @login_required
 def info_post():
     name = request.form.get('name')
     birthday = request.form.get('birthday')
-    height = (12 * int(request.form.get('height_feet'))) + int(request.form.get('height_inches'))
-    print(height)
+    height = ((12 * int(request.form.get('height_feet'))) + int(request.form.get('height_inches')))
     weight = request.form.get('weight')
     gender = request.form.get('gender')
     
+    updateAttribute("birthday", birthday)
+    updateAttribute("height", height)
+    updateAttribute("weight", weight)
+    updateAttribute("gender", gender)
+
     db.session.delete(current_user)
-    
     current_user.name = name
-    current_user.birthday = birthday
-    current_user.height = height
-    current_user.weight = weight
-    current_user.gender = gender
-    
     db.session.add(current_user)
     db.session.commit()
     
@@ -50,9 +55,81 @@ def info_post():
 @main.route('/preferences')
 @login_required
 def prefs():
-    return render_template('profile/prefs.html', name=current_user.name)
+    cycle = getCycle()
+    print(cycle)
+    return render_template('profile/prefs.html', name=current_user.name, cycle=cycle)
 
 @main.route('/settings')
 @login_required
 def settings():
     return render_template('profile/settings.html', name=current_user.name)
+
+
+
+
+def updateAttribute(attribute_name, attribute_value):
+    attribute_id = removeIfAttributeExists(attribute_name)
+    if(attribute_id == "DNE"):
+        attribute = UserData(user_id=current_user.id, attribute_name=attribute_name, attribute_value=attribute_value)
+    else:
+        attribute = UserData(attribute_id=attribute_id, user_id=current_user.id, attribute_name=attribute_name, attribute_value=attribute_value)
+
+    db.session.add(attribute)
+    db.session.commit()
+
+def removeIfAttributeExists(attribute_name):
+    attribute = getAttribute(attribute_name)
+    if(attribute != None):
+        id = attribute.attribute_id
+        db.session.delete(attribute)
+        db.session.commit()
+        return id
+    return "DNE"
+
+def getAttribute(attribute_name):
+    attribute = UserData.query.filter_by(user_id=current_user.id, attribute_name=attribute_name).first()
+    if(attribute != None):
+        return attribute.attribute_value
+    return None
+
+def getCycle():
+    numDays = getAttribute("num_days_in_cycle")
+    if(numDays == None):
+        updateAttribute("num_days_in_cycle", 0)
+        numDays = 0
+
+    cycle = []
+    for i in range(1, int(numDays) + 1):
+        day = getDay(i)
+        if(day == None):
+            updateDay(i, "Day " + str(i), 0, 0, 0, 0, 0, 0)
+            day = getDay(i)
+        cycle.append([day.name, [getExercise(day.exercise_id_1).name, getExercise(day.exercise_id_2).name, getExercise(day.exercise_id_3).name, getExercise(day.exercise_id_4).name, getExercise(day.exercise_id_5).name, getExercise(day.exercise_id_6).name]])
+    return cycle
+
+def updateDay(dayNumber, name, exercise_id_1, exercise_id_2, exercise_id_3, exercise_id_4, exercise_id_5, exercise_id_6):
+    day_id = removeIfDayExists(dayNumber)
+    if(day_id == "DNE"):
+        day = Days(user_id=current_user.id, name=name, day_in_cycle=dayNumber, exercise_id_1=exercise_id_1, exercise_id_2=exercise_id_2, exercise_id_3=exercise_id_3, exercise_id_4=exercise_id_4, exercise_id_5=exercise_id_5, exercise_id_6=exercise_id_6)
+    else:
+        day = Days(day_id=day_id, user_id=current_user.id, name=name, day_in_cycle=dayNumber, exercise_id_1=exercise_id_1, exercise_id_2=exercise_id_2, exercise_id_3=exercise_id_3, exercise_id_4=exercise_id_4, exercise_id_5=exercise_id_5, exercise_id_6=exercise_id_6)
+
+    db.session.add(day)
+    db.session.commit()
+
+def removeIfDayExists(dayNumber):
+    day = getDay(dayNumber)
+    if(day != None):
+        id = day.day_id
+        db.session.delete(day)
+        db.session.commit()
+        return id
+    return "DNE"
+
+def getDay(dayNumber):
+    day = Days.query.filter_by(user_id=current_user.id, day_in_cycle=dayNumber).first()
+    return day 
+
+def getExercise(exercise_id):
+    exercise = Exercises.query.filter_by(exercise_id=exercise_id).first()
+    return exercise
