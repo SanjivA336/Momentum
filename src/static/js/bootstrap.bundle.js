@@ -1,11 +1,7 @@
-  /**
-   * Custom Functions
-   */
+/**
+ * Custom Functions
+ */
 
-  // Add new field on button click
-  $(document).on('click', '.add_field', function() {
-    $('<input type="text" class="input" name="field[]" value="">').insertAfter('.input:last');
-  })
 
 /*!
   * Bootstrap v5.3.2 (https://getbootstrap.com/)

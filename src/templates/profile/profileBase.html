@@ -1,60 +1,44 @@
-<!doctype html>
-<html lang="en" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gym Tracker - Profile</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="static\css\bootstrap.css">
-    <link rel="stylesheet" href="static\css\style.css">
+{% block title %}Profile{% endblock %}
 
-    <script defer src="static\js\bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+{% block body %}
+<a class="bg-body-secondary position-fixed top-0 start-0 rounded m-4 p-2 shadow-lg d-flex align-items-center justify-content-center" href="/home">
+  <img src="static\images\placeholder.svg" alt="Back Arrow" width="50" height="50">
+</a>
+<div class="position-absolute top-0 end-0 rounded-circle m-3">
 
+</div>
+<a class="bg-body-secondary position-fixed top-0 end-0 rounded m-4 p-2 shadow-lg d-flex align-items-center justify-content-center" href="/logout">
+  <img src="static\images\placeholder.svg" alt="Logout" width="50" height="50">
+</a>
 
-  </head>
-
-  <body class="bg-body">
-
-    <a class="bg-body-secondary position-fixed top-0 start-0 rounded m-4 p-2 shadow-lg d-flex align-items-center justify-content-center" href="/home">
-      <img src="static\images\placeholder.svg" alt="Back Arrow" width="50" height="50">
-    </a>
-    <div class="position-absolute top-0 end-0 rounded-circle m-3">
-
+<div class="container-fluid h-100 m-0 p-5 d-flex align-items-center justify-content-center">
+  <div class="container-fluid bg-body-tertiary rounded rounded-6 shadow-lg p-3" style="width: 1000px;">
+    <div class="container-fluid d-flex justify-content-center">
+      <img src="static\images\pfp.png" alt="Logo" width="200" height="200" class="align-top ">
     </div>
-    <a class="bg-body-secondary position-fixed top-0 end-0 rounded m-4 p-2 shadow-lg d-flex align-items-center justify-content-center" href="/logout">
-      <img src="static\images\placeholder.svg" alt="Logout" width="50" height="50">
-    </a>
+    <div class="container-fluid d-flex justify-content-center border-bottom border-2 border-body-secondary mb-3">
+      <h1 class="text-light text-center text-truncate">Welcome, {{ name }}!</h1>
+    </div>
 
-    <div class="container-fluid h-100 m-0 p-5 d-flex align-items-center justify-content-center">
-      <div class="container-fluid bg-body-tertiary rounded rounded-6 shadow-lg p-3" style="width: 1000px;">
-        <div class="container-fluid d-flex justify-content-center">
-          <img src="static\images\pfp.png" alt="Logo" width="200" height="200" class="align-top ">
-        </div>
-        <div class="container-fluid d-flex justify-content-center border-bottom border-2 border-body-secondary mb-3">
-          <h1 class="text-light text-center text-truncate">Welcome, {{ name }}!</h1>
-        </div>
-
-        {% with messages = get_flashed_messages() %}
-        {% if messages and messages[0] == "Your changes have been saved!" %}
-          <div class="border border-1 border-success rounded-3 bg-success-subtle p-3 text-success text-center m-3">
-            {{ messages[0] }}
-          </div>
-        {% endif %}
-        {% if messages and messages[0] != "Your changes have been saved!" %}
-        <div class="border border-1 border-warning rounded-3 bg-warning-subtle p-3 text-warning text-center m-3">
-          {{ messages[0] }}
-        </div>
-        {% endif %}
-        {% endwith %}
-
-        {% block content %}
-
-        {% endblock %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages and messages[0] == "Your changes have been saved!" %}
+      <div class="border border-1 border-success rounded-3 bg-success-subtle p-3 text-success text-center m-3">
+        {{ messages[0] }}
       </div>
+    {% endif %}
+    {% if messages and messages[0] != "Your changes have been saved!" %}
+    <div class="border border-1 border-warning rounded-3 bg-warning-subtle p-3 text-warning text-center m-3">
+      {{ messages[0] }}
     </div>
-  </body>
-</html>
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}
+
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}
 

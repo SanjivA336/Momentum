@@ -19,6 +19,8 @@ class Exercises(UserMixin, db.Model):
     verified = db.Column(db.Boolean, default=True)
     name = db.Column(db.String(100))
     muscle_group = db.Column(db.String(100))
+    isweighted = db.Column(db.Boolean, default=True)
+    creator_id = db.Column(db.Integer)
     
 class History(UserMixin, db.Model):
     record_id = db.Column(db.Integer, primary_key=True)

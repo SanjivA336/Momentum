@@ -1,61 +1,48 @@
-<!doctype html>
-<html lang="en" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gym Tracker</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="static\css\bootstrap.css">
-    <link rel="stylesheet" href="static\css\style.css">
-
-    <script defer src="static\js\bootstrap.bundle.min.js"></script>
-
-  </head>
-
-  <body class="bg-body">
-    <div class="d-flex flex-wrap container-fluid vh-100 w-100 p-3 align-content-start">
-      <div class="col-12 p-0 mb-3" style="height: 100px;">
-        <div class="d-flex justify-content-between container-fluid shadow-lg bg-body-tertiary p-4 rounded-4 h-100">
-          <a href="/" class="text-decoration-none text-light">
-            <img src="static\images\placeholder.svg" alt="Menu" width="50" height="54" class="d-inline-block align-text-top">
-            <h1 class="d-inline-block align-text-top px-2">Gym Tracker</h1>
-          </a>
-          <a class="float-end" href="/info">
-            <img src="static\images\placeholder.svg" alt="Profile" width="50" height="54" class="d-inline-block align-text-top">
-          </a>
-        </div>
-      </div>
-      <div class="p-0 me-3 " style="width: 300px">
-        <div class="shadow-lg p-3 rounded-4 vstack gap-3 bg-body-tertiary h-100">
-          <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/home' or path == '/' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/">
-              <img src="static\images\placeholder.svg" alt="Home" width="40" height="40" class="d-inline-block align-top">
-              <h4 class="ps-2 d-inline-block text-truncate">Home</h4>
-          </a>
-          <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/start' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/start">
-            <img src="static\images\placeholder.svg" alt="Start" width="40" height="40" class="d-inline-block align-top">
-            <h4 class="ps-2 d-inline-block text-truncate">Start Workout</h4>
-          </a>
-          <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/record' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/record">
-            <img src="static\images\placeholder.svg" alt="Record" width="40" height="40" class="d-inline-block align-top">
-            <h4 class="ps-2 d-inline-block text-truncate">Record Workout</h4>
-          </a>
-          <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/food' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/food">
-            <img src="static\images\placeholder.svg" alt="Food" width="40" height="40" class="d-inline-block align-top">
-            <h4 class="ps-2 d-inline-block text-truncate">Record Food</h4>
-          </a>
-          <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/stats' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/stats">
-            <img src="static\images\placeholder.svg" alt="Stats" width="40" height="40" class="d-inline-block align-top">
-            <h4 class="ps-2 d-inline-block text-truncate">Statistics</h4>
-          </a>
-        </div>
-      </div>
-      <div class="p-0 m-0 flex-fill align-self-stretch">
-        <div class="container-fluid shadow-lg bg-body-tertiary p-4 rounded-4 h-100">
-          {% block content %} 
-          {% endblock %}
-        </div>
-      </div>
+{% block body %}
+<div class="d-flex flex-wrap container-fluid vh-100 w-100 p-3 align-content-start">
+  <div class="col-12 p-0 mb-3" style="height: 100px;">
+    <div class="d-flex justify-content-between container-fluid shadow-lg bg-body-tertiary p-4 rounded-4 h-100">
+      <a href="/" class="text-decoration-none text-light">
+        <img src="static\images\placeholder.svg" alt="Menu" width="50" height="54" class="d-inline-block align-text-top">
+        <h1 class="d-inline-block align-text-top px-2">Gym Tracker</h1>
+      </a>
+      <a class="float-end" href="/info">
+        <img src="static\images\placeholder.svg" alt="Profile" width="50" height="54" class="d-inline-block align-text-top">
+      </a>
     </div>
-  </body>
-</html>
+  </div>
+  <div class="p-0 me-3 " style="width: 300px">
+    <div class="shadow-lg p-3 rounded-4 vstack gap-3 bg-body-tertiary h-100">
+      <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/home' or path == '/' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/">
+          <img src="static\images\placeholder.svg" alt="Home" width="40" height="40" class="d-inline-block align-top">
+          <h4 class="ps-2 d-inline-block text-truncate">Home</h4>
+      </a>
+      <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/start' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/start">
+        <img src="static\images\placeholder.svg" alt="Start" width="40" height="40" class="d-inline-block align-top">
+        <h4 class="ps-2 d-inline-block text-truncate">Start Workout</h4>
+      </a>
+      <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/record' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/record">
+        <img src="static\images\placeholder.svg" alt="Record" width="40" height="40" class="d-inline-block align-top">
+        <h4 class="ps-2 d-inline-block text-truncate">Record Workout</h4>
+      </a>
+      <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/food' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/food">
+        <img src="static\images\placeholder.svg" alt="Food" width="40" height="40" class="d-inline-block align-top">
+        <h4 class="ps-2 d-inline-block text-truncate">Record Food</h4>
+      </a>
+      <a class="d-flex align-items-center text-light py-2 px-3 rounded-3 {% if path == '/stats' %} bg-body-secondary {% endif %}" style="text-decoration: none;" aria-current="page" href="/stats">
+        <img src="static\images\placeholder.svg" alt="Stats" width="40" height="40" class="d-inline-block align-top">
+        <h4 class="ps-2 d-inline-block text-truncate">Statistics</h4>
+      </a>
+    </div>
+  </div>
+  <div class="p-0 m-0 flex-fill align-self-stretch">
+    <div class="container-fluid shadow-lg bg-body-tertiary p-4 rounded-4 h-100">
+      {% block content %} 
+      {% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}
 
