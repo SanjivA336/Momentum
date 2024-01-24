@@ -1,2 +1,3 @@
-# Gym_Tracker
-A website designed to track and suggest exercise and nutrition plans
+# Momentum (In-Progress)
+A website designed to track and recommend exercise and nutrition plans
+
