@@ -17,10 +17,10 @@ def home():
 @login_required
 def info():
     name = current_user.name
-    birthday = getAttribute("birthday")
-    height = getAttribute("height")
-    weight = getAttribute("weight")
-    gender = getAttribute("gender")
+    birthday = getAttribute("birthday").attribute_value
+    height = getAttribute("height").attribute_value
+    weight = getAttribute("weight").attribute_value
+    gender = getAttribute("gender").attribute_value
 
     feet = ""
     inches = ""
@@ -99,7 +99,7 @@ def removeIfAttributeExists(attribute_name):
 def getAttribute(attribute_name):
     attribute = UserData.query.filter_by(user_id=current_user.id, attribute_name=attribute_name).first()
     if(attribute != None):
-        return attribute.attribute_value
+        return attribute
     return None
 
 def getCycle():
