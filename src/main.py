@@ -172,21 +172,6 @@ class Day:
     def getExercise(self, order):
         return getExercise(self.exercise_ids[order - 1])
     
-    def updateExercise(self, order):
-
-
-
-
-class Cycle:
-    def __init__(self, user_id):
-        self.days = []
-        numDays = getAttribute("num_days_in_cycle")
-        if(numDays == None):
-            updateAttribute("num_days_in_cycle", 0)
-            numDays = 0
-        for i in range(1, int(numDays) + 1):
-            day = Day(user_id, i)
-            self.days.append(day)
 
     
         
